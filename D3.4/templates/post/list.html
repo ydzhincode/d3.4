@@ -1,0 +1,32 @@
+{% extends 'default.html' %}
+{% load censor from custom_filters %}
+
+{% block title %}
+    Список новостей
+{% endblock title %}
+ 
+{% block main %}
+    {% for post in list_post %}
+        <div class="post">
+            <div class="post-title">
+                {{ post.title|censor:'*' }}
+            </div>
+            <div class="post-text">
+                {{ post.text|truncatechars:50|censor:'*' }}
+            </div>
+            <div class="row post-date">
+                <div class="col-auto me-auto">
+                    <small>{{ post.create_date}}</small>
+                </div>
+                <div class="col-auto">
+                    <a href="{% url 'post_show' post.id %}" class="icon-link icon-link-hover">
+                        Читать полность
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock main %}

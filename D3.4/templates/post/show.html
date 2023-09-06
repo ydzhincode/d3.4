@@ -1,0 +1,23 @@
+{% extends 'default.html' %}
+{% load censor from custom_filters %}
+
+{% block title %}
+    Новость - {{ post.title }}
+{% endblock title %}
+ 
+{% block main %}
+    <div class="post">
+        <div class="post-title">
+            {{ post.title|censor:'*' }}
+        </div>
+        <div class="post-text">
+            {{ post.text|censor:'*' }}
+        </div>
+        <div class="row post-date">
+            <div class="col-auto me-auto">
+                <small>{{ post.create_date}}</small>
+            </div>
+            <div class="col-auto"></div>
+        </div>
+    </div>
+{% endblock main %}
